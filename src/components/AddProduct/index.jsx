@@ -1,57 +1,50 @@
 import React, { useContext, memo, useState } from "react";
 import { FunctionsContext } from "../context/FunctionsContext";
-import { Title } from "./styled";
+import {
+  AddProductComponent,
+  Form,
+  Title,
+  StyledTextField,
+  StyledButton,
+} from "./styled";
+
 export const AddProduct = memo(() => {
   const [productPrice, setProductPrice] = useState("");
   const [productName, setProductName] = useState("");
   const { createProduct } = useContext(FunctionsContext);
-
-  const handleProductPrice = (input) => {
-    setProductPrice(input);
-    console.log(input);
-  };
-  const handleProductName = (input) => {
-    setProductName(input);
-    console.log(input);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    const name = productName.value;
-    const price = window.web3.utils.toWei(
-      productPrice.value.toString(),
-      "Ether"
-    );
+    const name = productName;
+    const price = window.web3.utils.toWei(productPrice, "Ether");
     createProduct(name, price);
   };
   return (
-    <>
+    <AddProductComponent>
       <Title>Add Product</Title>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group mr-sm-2">
-          <input
-            id="productName"
-            type="text"
-            ref={handleProductName}
-            className="form-control"
-            placeholder="Product Name"
-            required
-          />
-        </div>
-        <div className="form-group mr-sm-2">
-          <input
-            id="productPrice"
-            type="text"
-            ref={handleProductPrice}
-            className="form-control"
-            placeholder="Product Price"
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
+      <Form>
+        <StyledTextField
+          variant="outlined"
+          placeholder="Name"
+          onChange={(e) => {
+            setProductName(e.target.value);
+          }}
+        />
+        <StyledTextField
+          variant="outlined"
+          placeholder="Price"
+          onChange={(e) => {
+            setProductPrice(e.target.value);
+          }}
+        />
+
+        <StyledButton
+          color="primary"
+          variant="contained"
+          onClick={handleSubmit}
+        >
           Add Product
-        </button>
-      </form>
-    </>
+        </StyledButton>
+      </Form>
+    </AddProductComponent>
   );
 });

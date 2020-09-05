@@ -4,9 +4,31 @@ import Marketplace from "../abis/Marketplace.json";
 import { Navbar } from "./Navbar";
 import Main from "./Main";
 import { FunctionsContext } from "./context/FunctionsContext";
+import { createGlobalStyle } from "styled-components";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    width: 100%;
+    
+  }
+`;
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#0074C6",
+    },
+    secondary: {
+      main: "#0074C6",
+    },
+  },
+});
 
 class App extends Component {
-
   async componentWillMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
@@ -90,26 +112,21 @@ class App extends Component {
     const { createProduct, purchaseProduct } = this;
     const { products, account, loading } = this.state;
     return (
-      <FunctionsContext.Provider
-        value={{
-          createProduct,
-          purchaseProduct,
-          products,
-          account,
-        }}
-      >
-        <Navbar />
+      <ThemeProvider theme={theme}>
+        <FunctionsContext.Provider
+          value={{
+            createProduct,
+            purchaseProduct,
+            products,
+            account,
+          }}
+        >
+          <GlobalStyle />
+          <Navbar />
 
-        {loading ? (
-          <>Loading...</>
-        ) : (
-          <Main
-            products={this.state.products}
-            createProduct={this.createProduct}
-            purchaseProduct={this.purchaseProduct}
-          />
-        )}
-      </FunctionsContext.Provider>
+          {loading ? <>Loading...</> : <Main />}
+        </FunctionsContext.Provider>
+      </ThemeProvider>
     );
   }
 }

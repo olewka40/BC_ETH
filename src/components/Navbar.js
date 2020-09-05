@@ -18,6 +18,8 @@ const StyledHeader = styled.div`
   background-color: #9fcdff;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 const Text = styled.div`
   color: black;

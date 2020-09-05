@@ -8,6 +8,7 @@ import {
   TableContainer,
   TableRow,
   Paper,
+  Button,
 } from "@material-ui/core";
 
 export const BuyProduct = memo(() => {
@@ -20,7 +21,7 @@ export const BuyProduct = memo(() => {
     <>
       <Title>Buy Product</Title>
       <TableContainer component={Paper}>
-        <Table aria-label="simple table">
+        <Table>
           <TableRow>
             <TableCell align="left">#</TableCell>
             <TableCell align="left">Name</TableCell>
@@ -41,13 +42,14 @@ export const BuyProduct = memo(() => {
                 <TableCell>{product.owner}</TableCell>
                 <TableCell>
                   {!product.purchased ? (
-                    <button
-                      name={product.id}
+                    <Button
+                      color="primary"
+                      variant="contained"
                       value={product.price}
                       onClick={handleClickButton}
                     >
                       Buy
-                    </button>
+                    </Button>
                   ) : null}
                 </TableCell>
               </TableRow>
