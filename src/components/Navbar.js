@@ -7,7 +7,7 @@ export const Navbar = () => {
   return (
     <StyledHeader>
       <Text>Test project</Text>
-      <Text>Eth wallet: {account}</Text>
+      <Text>Current Eth wallet: {account}</Text>
     </StyledHeader>
   );
 };

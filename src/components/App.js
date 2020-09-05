@@ -6,6 +6,7 @@ import Main from "./Main";
 import { FunctionsContext } from "./context/FunctionsContext";
 
 class App extends Component {
+
   async componentWillMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
