@@ -5,6 +5,7 @@ export const Title = styled.div`
   font-size: 24px;
   font-weight: 600;
   margin: 5px;
+  text-align: center;
 `;
 export const Form = styled.div`
   display: flex;

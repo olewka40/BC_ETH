@@ -1,6 +1,6 @@
 import React, { useContext, memo } from "react";
 import { FunctionsContext } from "../context/FunctionsContext";
-import { Title } from "./styled";
+import { Title, StyledBuyProduct, AccountOwner } from "./styled";
 import {
   Table,
   TableBody,
@@ -12,13 +12,13 @@ import {
 } from "@material-ui/core";
 
 export const BuyProduct = memo(() => {
-  const { products, purchaseProduct } = useContext(FunctionsContext);
+  const { products, purchaseProduct, account } = useContext(FunctionsContext);
 
   const handleClickButton = (event) => {
     purchaseProduct(event.target.name, event.target.value);
   };
   return (
-    <>
+    <StyledBuyProduct>
       <Title>Buy Product</Title>
       <TableContainer component={Paper}>
         <Table>
@@ -39,7 +39,13 @@ export const BuyProduct = memo(() => {
                   {window.web3.utils.fromWei(product.price.toString(), "Ether")}
                   Eth
                 </TableCell>
-                <TableCell>{product.owner}</TableCell>
+                <TableCell>
+                  {account === product.owner ? (
+                    <AccountOwner>{product.owner}</AccountOwner>
+                  ) : (
+                    <>{product.owner}</>
+                  )}
+                </TableCell>
                 <TableCell>
                   {!product.purchased ? (
                     <Button
@@ -57,6 +63,6 @@ export const BuyProduct = memo(() => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </StyledBuyProduct>
   );
 });

@@ -6,6 +6,7 @@ import Main from "./Main";
 import { FunctionsContext } from "./context/FunctionsContext";
 import { createGlobalStyle } from "styled-components";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { Title } from "./AddProduct/styled";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -123,8 +124,8 @@ class App extends Component {
         >
           <GlobalStyle />
           <Navbar />
-
-          {loading ? <>Loading...</> : <Main />}
+          {loading ? <Title>Loading...</Title> : <Title>Wellcome! </Title>}
+          <Main />
         </FunctionsContext.Provider>
       </ThemeProvider>
     );
