@@ -12,12 +12,13 @@ export const AddProduct = memo(() => {
   const [productPrice, setProductPrice] = useState("");
   const [productName, setProductName] = useState("");
   const { createProduct } = useContext(FunctionsContext);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const name = productName;
+
+  const handleSubmit = () => {
     const price = window.web3.utils.toWei(productPrice, "Ether");
-    createProduct(name, price);
+    console.log(price);
+    createProduct(productName, price);
   };
+
   return (
     <AddProductComponent>
       <Title>Add Product</Title>

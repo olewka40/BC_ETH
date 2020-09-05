@@ -1,6 +1,6 @@
 import React, { useContext, memo } from "react";
 import { FunctionsContext } from "../context/FunctionsContext";
-import { Title, StyledBuyProduct, AccountOwner } from "./styled";
+import { Title, StyledBuyProduct } from "./styled";
 import {
   Table,
   TableBody,
@@ -8,15 +8,12 @@ import {
   TableContainer,
   TableRow,
   Paper,
-  Button,
 } from "@material-ui/core";
+import { Product } from "./Product";
 
 export const BuyProduct = memo(() => {
-  const { products, purchaseProduct, account } = useContext(FunctionsContext);
+  const { products } = useContext(FunctionsContext);
 
-  const handleClickButton = (event) => {
-    purchaseProduct(event.target.name, event.target.value);
-  };
   return (
     <StyledBuyProduct>
       <Title>Buy Product</Title>
@@ -32,33 +29,7 @@ export const BuyProduct = memo(() => {
 
           <TableBody>
             {products.map((product, key) => (
-              <TableRow key={key}>
-                <TableCell>{product.id.toString()}</TableCell>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>
-                  {window.web3.utils.fromWei(product.price.toString(), "Ether")}
-                  Eth
-                </TableCell>
-                <TableCell>
-                  {account === product.owner ? (
-                    <AccountOwner>{product.owner}</AccountOwner>
-                  ) : (
-                    <>{product.owner}</>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {!product.purchased ? (
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      value={product.price}
-                      onClick={handleClickButton}
-                    >
-                      Buy
-                    </Button>
-                  ) : null}
-                </TableCell>
-              </TableRow>
+              <Product key={key} product={product} />
             ))}
           </TableBody>
         </Table>
