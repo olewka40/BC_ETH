@@ -6,7 +6,6 @@ import Main from "./Main";
 import { FunctionsContext } from "./context/FunctionsContext";
 import { createGlobalStyle } from "styled-components";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { Title } from "./AddProduct/styled";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -52,9 +51,12 @@ class App extends Component {
     const web3 = window.web3;
     // Load account
     const accounts = await web3.eth.getAccounts();
+
     this.setState({ account: accounts[0] });
+
     const networkId = await web3.eth.net.getId();
     const networkData = Marketplace.networks[networkId];
+
     if (networkData) {
       const marketplace = web3.eth.Contract(
         Marketplace.abi,
@@ -70,7 +72,6 @@ class App extends Component {
           products: [...this.state.products, product],
         });
       }
-      this.setState({ loading: false });
     } else {
       window.alert("Marketplace contract not deployed to detected network.");
     }
@@ -82,7 +83,6 @@ class App extends Component {
       account: "",
       productCount: 0,
       products: [],
-      loading: true,
     };
 
     this.createProduct = this.createProduct.bind(this);
@@ -90,28 +90,20 @@ class App extends Component {
   }
 
   createProduct(name, price) {
-    this.setState({ loading: true });
     this.state.marketplace.methods
       .createProduct(name, price)
-      .send({ from: this.state.account })
-      .once("receipt", (receipt) => {
-        this.setState({ loading: false });
-      });
+      .send({ from: this.state.account });
   }
 
   purchaseProduct(id, price) {
-    this.setState({ loading: true });
     this.state.marketplace.methods
       .purchaseProduct(id)
-      .send({ from: this.state.account, value: price })
-      .once("receipt", (receipt) => {
-        this.setState({ loading: false });
-      });
+      .send({ from: this.state.account, value: price });
   }
 
   render() {
     const { createProduct, purchaseProduct } = this;
-    const { products, account, loading } = this.state;
+    const { products, account } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <FunctionsContext.Provider
@@ -124,7 +116,6 @@ class App extends Component {
         >
           <GlobalStyle />
           <Navbar />
-          {loading ? <Title>Loading...</Title> : <Title>Wellcome! </Title>}
           <Main />
         </FunctionsContext.Provider>
       </ThemeProvider>

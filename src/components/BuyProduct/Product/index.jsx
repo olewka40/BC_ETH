@@ -5,10 +5,8 @@ import { FunctionsContext } from "../../context/FunctionsContext";
 
 export const Product = ({ product }) => {
   const { purchaseProduct, account } = useContext(FunctionsContext);
-  console.log(product);
   const handleClickButton = useCallback(() => {
     purchaseProduct(product.id, product.price);
-    console.log(product.id, product.price);
   }, [product]);
 
   return (

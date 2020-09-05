@@ -15,7 +15,6 @@ export const AddProduct = memo(() => {
 
   const handleSubmit = () => {
     const price = window.web3.utils.toWei(productPrice, "Ether");
-    console.log(price);
     createProduct(productName, price);
   };
 
