@@ -7,6 +7,7 @@ import {
   StyledTextField,
   StyledButton,
 } from "./styled";
+import { Add } from "@material-ui/icons";
 
 export const AddProduct = memo(() => {
   const [productPrice, setProductPrice] = useState("");
@@ -41,6 +42,7 @@ export const AddProduct = memo(() => {
           color="primary"
           variant="contained"
           onClick={handleSubmit}
+          endIcon={<Add />}
         >
           Add Product
         </StyledButton>

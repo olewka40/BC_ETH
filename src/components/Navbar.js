@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { FunctionsContext } from "./context/FunctionsContext";
-
+import headerLogo from "../images/headerLogo.png";
 export const Navbar = () => {
   const { account } = useContext(FunctionsContext);
   return (
     <StyledHeader>
-      <Text>Test project</Text>
+      <img src={headerLogo} alt={headerLogo} height="100px" />
       <Text>Current Eth wallet: {account}</Text>
     </StyledHeader>
   );
 };
 
 const StyledHeader = styled.div`
-  height: 48px;
   width: 100%;
   background-color: #9fcdff;
   display: flex;
@@ -24,4 +23,5 @@ const StyledHeader = styled.div`
 const Text = styled.div`
   color: black;
   font-size: 16px;
+  margin: 10px;
 `;

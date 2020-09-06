@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from "react";
 import { AccountOwner } from "../styled";
 import { TableCell, TableRow, Button } from "@material-ui/core";
 import { FunctionsContext } from "../../context/FunctionsContext";
-
+import { ShoppingCart } from "@material-ui/icons";
 export const Product = ({ product }) => {
   const { purchaseProduct, account } = useContext(FunctionsContext);
   const handleClickButton = useCallback(() => {
@@ -30,6 +30,7 @@ export const Product = ({ product }) => {
             color="primary"
             variant="contained"
             onClick={handleClickButton}
+            endIcon={<ShoppingCart />}
           >
             Buy
           </Button>
